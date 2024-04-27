@@ -1,21 +1,12 @@
-'use client'
-//import Home from './home/page';
-//import Login from './components/login/Login';
-//import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-/*
-<Router>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-      </Routes>
-    </Router>
-*/
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
     <h1>Home Page</h1>
+    <Link href='/login'> Login </Link>
+    <Link href='signup'>Create Account</Link>
     </main>
   )
 }
