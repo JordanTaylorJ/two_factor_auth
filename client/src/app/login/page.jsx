@@ -3,24 +3,65 @@ import React, {useState} from 'react';
 
 const Login = () => {
 
-    const [hidden, setHidden] = useState(true)
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const [hidden, setHidden] = useState(true);
+
+    const handleChange = (e) => {
+        const target = e.target
+        setFormData({...formData, [target.id]: target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("SUBMIT")
+        /*
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then((r) => {
+            r.json.then(r => console.log(r))
+        })
+        */
+    }
 
     return( 
         <main className="min-h-screen content-center">
         <div className='w-full max-w-xs'>
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form onSubmit={e => handleSubmit(e)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             Email
                         </label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email"/>
+                        <input 
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            id="email" 
+                            value={formData.email}
+                            type="text" 
+                            placeholder="Email"
+                            onChange={(e) => handleChange(e)}
+                        />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             Password
                         </label>
                         <div className='flex'>
-                            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type={hidden ? 'password' : 'text'} placeholder="Password"/>
+                            <input 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                id="password" 
+                                value={formData.password}
+                                type={hidden ? 'password' : 'text'} 
+                                placeholder="Password"
+                                onChange={(e) => handleChange(e)}
+                            />
                             <svg onClick={() => setHidden(!hidden)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 m-2">
                                {hidden == true ?
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -36,7 +77,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-between">
-                        <button className="bg-black hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <button className="bg-black hover:bg-teal-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Login
                         </button>
                     </div>
