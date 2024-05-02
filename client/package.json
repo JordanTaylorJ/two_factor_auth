@@ -2,8 +2,9 @@
   "name": "2fa",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3000",
   "scripts": {
-    "dev": "next dev",
+    "dev": "PORT=4000 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
